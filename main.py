@@ -118,9 +118,11 @@ batch_count = 0
 item_index = np.arange(item_node_num)
 
 # model config
-config = tf.ConfigProto()
+# config = tf.ConfigProto()
+config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True
-sess = tf.Session(config=config)
+# sess = tf.Session(config=config)
+sess = tf.compat.v1.Session(config=config)
 model = eval(args.model)(sess, args, emb.shape[-1], content_data.shape[-1])
 
 save_dir = './GAR/model_save/'

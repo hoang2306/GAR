@@ -46,7 +46,8 @@ class GAR(object):
         self.g_act = 'tanh'
         self.d_act = 'tanh'
 
-        self.content = tf.placeholder(tf.float32, [None, content_dim], name='condition')
+        # self.content = tf.placeholder(tf.float32, [None, content_dim], name='condition')
+        self.content = tf.compat.v1.placeholder(tf.float32, [None, content_dim], name='condition')
         self.real_emb = tf.placeholder(tf.float32, [None, emb_dim], name='real_emb')
         self.neg_emb = tf.placeholder(tf.float32, [None, emb_dim], name='neg_emb')
         self.opp_emb = tf.placeholder(tf.float32, [None, emb_dim], name='opp_emb')
@@ -124,7 +125,7 @@ class GAR(object):
         print([v.name for v in tf.trainable_variables()])
 
     def build_generator(self, condition, hid_dims, act, drop_rate, training, reuse):
-        with tf.variable_scope('G', reuse=reuse):
+        with tf.compact.v1.variable_scope('G', reuse=reuse):
             gen_emb = build_mlp(condition, hid_dims, act, drop_rate, training, 'E0', False)
         return gen_emb
 

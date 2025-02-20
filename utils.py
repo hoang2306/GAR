@@ -7,7 +7,8 @@ import os
 def set_seed_tf(seed):
     random.seed(seed)
     np.random.seed(seed)
-    tf.set_random_seed(seed)
+    # tf.set_random_seed(seed)
+    tf.compat.v1.set_random_seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
 
 
